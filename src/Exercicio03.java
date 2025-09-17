@@ -1,38 +1,30 @@
+import java.text.DecimalFormat;
 import java.util.Random;
 
 public class Exercicio03 {
     public static void main(String[] args) {
         Random random = new Random();
-        int ordem = random.nextInt(2, 6);
-        int[][] matriz = new int[ordem][ordem];
-        int aux, k;
+        double[][] temperatura = new double[3][5];
+        DecimalFormat df = new DecimalFormat("0.00");
+        double[] mediaAnual = new double[temperatura.length];
+        double media;
 
-        // gerar e imprimir a matriz
-        System.out.println("Valores originais");
-        for(int i = 0; i < ordem; i++) {
-            for(int j = 0; j < ordem; j++) {
-                matriz[i][j] = random.nextInt(3, 20);
-                System.out.print(matriz[i][j] + "\t");
+        // armazena e imprime as temperaturas
+        for(int i = 0; i < temperatura.length; i++) {
+            media = 0;
+            for(int j = 0; j < temperatura[i].length; j++) {
+                temperatura[i][j] = random.nextDouble(10, 40);
+                System.out.print(df.format(temperatura[i][j]) + "\t");
+                media += temperatura[i][j];
             }
+            mediaAnual[i] = media / temperatura[i].length;
             System.out.println();
         }
 
-        // trocar os elementos
-        k = ordem - 1;
-        for(int i = 0; i < ordem; i++) {
-            aux = matriz[i][i];
-            matriz[i][i] = matriz[i][k];
-            matriz[i][k] = aux;
-            k--;
+        // impressão da material anual
+        for(int i = 0; i < mediaAnual.length; i++) {
+            System.out.println("Ano " + (i+1) + " --> " + df.format(mediaAnual[i]));
         }
 
-        // imprimir a matriz
-        System.out.println("\nImpressão após a troca dos elementos");
-        for(int i = 0; i < ordem; i++) {
-            for(int j = 0; j < ordem; j++) {
-                System.out.print(matriz[i][j] + "\t");
-            }
-            System.out.println();
-        }
     }
 }
